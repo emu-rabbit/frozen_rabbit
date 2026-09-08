@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#eff1df">
+  <meta name="description" content="歡迎來到冷凍兔肉的小基地。帶上 Workshop 的備料清單、Tome 的採集秘笈和 Cosmic 的製作引導，一起在 FFXIV 冒險。">
+  <title>冷凍兔肉的小基地｜FFXIV 工具與冒險日常</title>
+  <link rel="icon" href="./assets/workshop.png" type="image/png">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;800;900&amp;family=Klee+One:wght@400;600&amp;display=swap">
+  <script src="./site.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#projects">跳至工具入口</a>
+  <header class="header wrap">
+    <a class="brand" href="#" aria-label="冷凍兔肉首頁"><img src="./assets/workshop.png" alt="" width="48" height="48"><span>冷凍兔肉</span></a>
+    <nav aria-label="主要導覽"><a href="#projects">工具傳送門 ↗</a><a href="#snapshots">冒險相簿</a><a class="github" href="https://github.com/emu-rabbit" target="_blank" rel="noopener noreferrer">GitHub ↗<span class="sr-only">（另開分頁）</span></a></nav>
+  </header>
+  <main>
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <h1 id="hero-title">歡迎光臨，<br><span class="name-sticker">冷凍兔肉</span><br>的小基地<span class="orange">！</span></h1>
+        <p class="handwritten hero-aside">生活職是本業，拯救世界是副業。<span aria-hidden="true">✳</span></p>
+        <p class="hero-description">FFXIV 備料、採集與製作的小幫手。<br>需要什麼，自己拿，別客氣。</p>
+        <a class="button hero-button" href="#projects">來，這邊傳送 <span aria-hidden="true">↘</span></a>
+      </div>
+      <div class="collage">
+        <div class="sunburst" aria-hidden="true">生活職<br><b>出沒注意</b></div>
+        <figure class="mini-photo"><img src="./assets/book.jpg" width="1905" height="1071" alt="綠髮角色在海邊翻開發光的書"><figcaption class="handwritten">有事沒事，翻一下秘笈。</figcaption></figure>
+        <svg class="character-sticker" viewBox="580 210 950 850" role="img" aria-labelledby="sticker-title">
+          <title id="sticker-title">遊戲原照中的綠髮角色，穿著紫白外套揮手，剪成白邊貼紙</title>
+          <defs><path id="character-outline" d="M753 280 794 257 851 246 895 268 925 262 952 286 940 326 968 356 974 395 1017 420 1050 465 1125 478 1185 505 1254 564 1330 618 1410 683 1458 742 1444 771 1410 833 1357 910 1290 965 1206 1012 1141 1000 1070 974 1026 942 972 872 938 810 898 735 868 657 851 586 813 549 767 517 705 510 629 470 696 451 752 457 771 433 750 400 740 342Z"/><clipPath id="character-clip"><use href="#character-outline"/></clipPath></defs>
+          <use href="#character-outline" fill="#fffdf4" stroke="#fffdf4" stroke-width="28" stroke-linejoin="round"/>
+          <image href="./assets/crafter.jpg" width="1906" height="1070" clip-path="url(#character-clip)"/>
+        </svg>
+        <span class="doodle star-one" aria-hidden="true">✳</span><span class="doodle star-two" aria-hidden="true">✧</span>
+        <span class="photo-note handwritten">本人比工具<br>還常在拍照。</span>
+      </div>
+    </section>
+    <section class="toolkit wrap" id="projects" aria-labelledby="projects-title">
+      <div class="section-heading"><h2 id="projects-title">今天要去哪裡<span class="orange">？</span></h2><p class="handwritten">不用傳送費，放心點。↙</p></div>
+      <article class="destination workshop">
+        <div class="project-art workshop-art"><span class="tape" aria-hidden="true"></span><img src="./assets/workshop.png" alt="" width="691" height="691" loading="lazy"><div class="shopping-list handwritten"><span>☑ 想做的裝備</span><span>☐ 我的錢包……</span></div><span class="price-stamp" aria-hidden="true">備料中！</span></div>
+        <div class="project-copy"><p class="project-en">WORKSHOP</p><h3>工坊 · 備料規劃</h3><p class="project-description">拆解配方、估算預算，把要買、要採、要做的材料整理成清單。</p></div>
+        <a class="ticket" href="https://workshop.frozenrabbit.com/" target="_blank" rel="noopener noreferrer"><strong>前往工坊</strong><span class="ticket-arrow" aria-hidden="true">↗</span><span class="sr-only">（另開分頁）</span></a>
+      </article>
+      <article class="destination tome">
+        <div class="project-art tome-art"><img src="./assets/tome.png" alt="" width="256" height="256" loading="lazy"><span class="handwritten book-note">這一鎬，要有收穫。</span></div>
+        <div class="project-copy"><p class="project-en">TOME</p><h3>秘笈 · 採集策略</h3><p class="project-description">依能力值推薦採礦、園藝與收藏品手法，也能模擬自己的技能組合。</p></div>
+        <a class="ticket" href="https://tome.frozenrabbit.com/" target="_blank" rel="noopener noreferrer"><strong>翻開秘笈</strong><span class="ticket-arrow" aria-hidden="true">↗</span><span class="sr-only">（另開分頁）</span></a>
+      </article>
+      <article class="destination cosmic">
+        <div class="project-art cosmic-art"><img class="space-photo" src="./assets/space.png" alt="穿白色貓耳兜帽的角色，在宇宙探索設施前自拍" width="1069" height="1907" loading="lazy"><img class="cosmic-icon" src="./assets/cosmic.png" alt="" width="192" height="192" loading="lazy"><span class="space-caption handwritten">兔肉已抵達宇宙。✓</span></div>
+        <div class="project-copy"><p class="project-en">COSMIC</p><h3>宇宙 · 製作引導</h3><p class="project-description">專為宇宙探索高難度製作，依實際結果與球色，陪你判斷下一招。</p></div>
+        <a class="ticket" href="https://emu-rabbit.github.io/frozen_rabbit_cosmic/" target="_blank" rel="noopener noreferrer"><strong>出發去宇宙</strong><span class="ticket-arrow" aria-hidden="true">↗</span><span class="sr-only">（另開分頁）</span></a>
+      </article>
+    </section>
+    <section class="snapshots" id="snapshots" aria-labelledby="snapshots-title"><div class="wrap">
+      <div class="section-heading"><h2 id="snapshots-title">冒險的空檔</h2><p class="handwritten">點照片，看大張的。</p></div>
+      <div class="photo-wall">
+        <figure class="memory memory-friends"><a href="./assets/friends.png" class="photo-open" data-caption="一起看風景，也是正經事。"><img src="./assets/friends.png" alt="兩位角色並肩坐著，望向遠方的水晶塔" width="1911" height="637" loading="lazy"></a><figcaption class="handwritten">一起看風景，也是正經事。</figcaption></figure>
+        <figure class="memory memory-witch"><a href="./assets/witch.jpg" class="photo-open" data-caption="今天不趕進度，先拍一張。"><img src="./assets/witch.jpg" alt="戴著大魔女帽的綠髮角色，微笑坐在城市街道上" width="1349" height="911" loading="lazy"></a><figcaption class="handwritten">今天不趕進度，先拍一張。</figcaption></figure>
+        <div class="personal-note"><span class="tape" aria-hidden="true"></span><p>希望工具用得順手，<br>也別忘了偶爾放下清單，看看風景。</p><span class="handwritten">冷凍兔肉 ☺</span></div>
+      </div>
+    </div></section>
+  </main>
+  <footer class="wrap"><div class="footer-small"><span>玩家自製・非官方 FFXIV 工具網站<br>遊戲影像 © SQUARE ENIX</span><a href="https://github.com/emu-rabbit" target="_blank" rel="noopener noreferrer">GitHub ↗<span class="sr-only">（另開分頁）</span></a></div></footer>
+  <dialog class="photo-dialog" aria-label="冒險照片預覽"><button class="close-photo" type="button" aria-label="關閉照片">✕</button><img alt=""><p class="handwritten"></p></dialog>
+</body>
+</html>
