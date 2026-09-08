@@ -1,6 +1,6 @@
 import { mkdir, copyFile, cp } from 'node:fs/promises';
 await mkdir('dist', { recursive: true });
-for (const file of ['index.html', 'style.css', 'site.js']) {
+for (const file of ['index.html', 'style.css', 'site.js', 'robots.txt', 'sitemap.xml']) {
   await copyFile(file, `dist/${file}`);
 }
 await cp('assets', 'dist/assets', { recursive: true });

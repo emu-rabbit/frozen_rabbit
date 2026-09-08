@@ -81,12 +81,49 @@ function setLanguage(language) {
     else element.innerHTML = values[index];
   }
   document.documentElement.lang = ['zh-Hant', 'zh-Hans', 'en', 'ja'][index];
+  syncSeo(index);
   languageSelect.value = language;
   for (const link of document.querySelectorAll('.photo-open')) {
     link.dataset.caption = link.closest('figure').querySelector('figcaption').textContent;
   }
   if (language !== 'tw') document.querySelector('.personal-note>.handwritten').append(' ☺');
   try { localStorage.setItem('frozen-rabbit-language', language); } catch { /* Storage may be unavailable. */ }
+}
+function syncSeo(index) {
+  const description = document.querySelector('meta[name="description"]').content;
+  const imageAlt = [
+    '冷凍兔肉的 FFXIV 角色，綠髮、紫白色服裝，四周環繞製作與採集職業圖示。',
+    '冷冻兔肉的 FFXIV 角色，绿发、紫白色服装，四周环绕制作与采集职业图标。',
+    'Frozen Rabbit’s green-haired FFXIV character in purple and white, surrounded by crafting and gathering job icons.',
+    '紫と白の服を着た緑髪の FFXIV キャラクター。周囲にはクラフターとギャザラーのジョブアイコン。',
+  ][index];
+  for (const selector of ['meta[property="og:title"]', 'meta[name="twitter:title"]']) {
+    document.querySelector(selector).content = document.title;
+  }
+  for (const selector of ['meta[property="og:description"]', 'meta[name="twitter:description"]']) {
+    document.querySelector(selector).content = description;
+  }
+  for (const selector of ['meta[property="og:image:alt"]', 'meta[name="twitter:image:alt"]']) {
+    document.querySelector(selector).content = imageAlt;
+  }
+  const locales = ['zh_TW', 'zh_CN', 'en_US', 'ja_JP'];
+  document.querySelector('meta[property="og:locale"]').content = locales[index];
+  document.querySelectorAll('meta[property="og:locale:alternate"]').forEach((element, alternate) => {
+    element.content = locales.filter((_, position) => position !== index)[alternate];
+  });
+  const structuredData = document.querySelector('#structured-data');
+  const data = JSON.parse(structuredData.textContent);
+  const page = data['@graph'].find(entity => entity['@type'] === 'CollectionPage');
+  page.name = document.title;
+  page.description = description;
+  page.inLanguage = document.documentElement.lang;
+  const list = data['@graph'].find(entity => entity['@type'] === 'ItemList');
+  list.itemListElement.forEach((entry, position) => {
+    const project = document.querySelectorAll('.destination')[position];
+    entry.item.name = project.querySelector('h3').textContent;
+    entry.item.description = project.querySelector('.project-description').textContent;
+  });
+  structuredData.textContent = JSON.stringify(data);
 }
 let savedLanguage;
 try { savedLanguage = localStorage.getItem('frozen-rabbit-language'); } catch { /* Use the default. */ }
