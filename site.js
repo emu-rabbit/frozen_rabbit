@@ -37,7 +37,7 @@ const translations = [
   ['.mini-photo img', 'alt', '绿发角色在海边翻开发光的书', 'A green-haired character opens a glowing book by the sea', '海辺で光る本を開く緑髪のキャラクター'],
   ['.mini-photo figcaption', '', '有事没事，翻一下秘籍。', 'Always time for a little reading.', '暇があれば、秘伝書をぱらり。'],
   ['#sticker-title', '', '游戏原照中的绿发角色，穿着紫白外套挥手，剪成白边贴纸', 'A white-bordered sticker of a green-haired character waving in a purple and white coat, cut from a game screenshot', 'ゲーム写真から切り抜いた、紫と白のコートで手を振る緑髪のキャラクターの白縁ステッカー'],
-  ['.photo-note', '', '本人比工具<br>还常在拍照。', 'More snapshots<br>than tool updates.', 'ツール作りより<br>写真ばかり撮ってます。'],
+  ['.photo-note', '', '本兔拍照拍拍拍拍', 'This bunny goes snap snap snap snap!', 'このうさぎ、写真をパシャパシャパシャパシャ！'],
   ['#projects-title', '', '今天要去哪里<span class="orange">？</span>', 'Where to today<span class="orange">?</span>', '今日はどこへ<span class="orange">？</span>'],
   ['.toolkit .section-heading>p', '', '不用传送费，放心点。↙', 'No teleport fee. Take your pick. ↙', 'テレポ代は無料。気軽にどうぞ。↙'],
   ['.shopping-list span:first-child', '', '☑ 想做的装备', '☑ Gear to craft', '☑ 作りたい装備'],
