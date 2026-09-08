@@ -30,6 +30,8 @@ GoDaddy DNS 設定（TTL 可維持 1 小時）：
 
 `index.html` 維護介紹與連結，`style.css` 維護響應式版面。`assets/` 使用站主提供的 FFXIV 遊戲照片，以及三個專案各自設定的 favicon。首頁人物以 SVG 裁切原照、加上白色紙邊，沒有重繪角色。原始下載資料夾中的照片未修改。
 
+頁面圖片使用 WebP，依顯示用途縮放；首頁人物保留原解析度以維持 SVG 裁切座標與清晰度。相簿先載入 `friends-thumb.webp`、`witch-thumb.webp`，點擊後才載入原解析度的 WebP 大圖。下方圖片保留延遲載入並使用非同步解碼。網站與 Apple 圖示共用 180 × 180 PNG，分享圖保留 1200 × 630 JPEG。圖片資產合計約 748 KiB；更新圖片時，請同步維護 HTML 的尺寸與 `server.mjs` 的圖片路徑。
+
 素材對照：`crafter.jpg` = `messageImage_1776248815070.jpg`；`book.jpg` = `messageImage_1777446404831.jpg`；`witch.jpg` = `messageImage_1780284008122.jpg`；`friends.png` = `twitter.png`；`space.png` = `螢幕擷取畫面 2026-08-17 084158.png`。遊戲影像 © SQUARE ENIX。
 
 ## SEO 與連結預覽
