@@ -155,6 +155,7 @@ footer { padding-block: 24px; }
   h1 { font-size: 44px; }
   .hero-aside { margin-top: 19px; font-size: 16px; }
   .hero-description { font-size: 16px; }
+  .hero-button { display: none; }
   .collage { width: 100%; max-width: 370px; justify-self: center; height: 330px; margin-top: 22px; }
   .character-sticker { top: 50px; left: -15px; width: 105%; height: 255px; }
   .collage::before { height: 83%; }
