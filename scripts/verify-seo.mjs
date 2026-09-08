@@ -27,7 +27,7 @@ const page = graph.find(entity => entity['@type'] === 'CollectionPage');
 assert.equal(page.name, title);
 assert.equal(page.description, meta('description'));
 assert.equal(page.url, origin);
-const projects = [...html.matchAll(/<article class="destination[^>]*>([\s\S]*?)<\/article>/g)].map(match => match[1]);
+const projects = [...html.matchAll(/<a class="destination[^>]*>[\s\S]*?<\/a>/g)].map(match => match[0]);
 const list = graph.find(entity => entity['@type'] === 'ItemList');
 assert.equal(list.numberOfItems, projects.length);
 list.itemListElement.forEach(({ item }, index) => {

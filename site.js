@@ -28,7 +28,7 @@ const translations = [
   ['.brand>span, .personal-note>.handwritten', '', '冷冻兔肉', 'Frozen Rabbit', '冷凍うさぎ'],
   ['nav', 'aria-label', '主要导航', 'Main navigation', 'メインナビゲーション'],
   ['#language', 'aria-label', '切换语言', 'Change language', '言語を切り替える'],
-  ['a>.sr-only', '', '（在新标签页打开）', ' (opens in a new tab)', '（新しいタブで開きます）'],
+  ['a .sr-only', '', '（在新标签页打开）', ' (opens in a new tab)', '（新しいタブで開きます）'],
   ['#hero-title', '', '欢迎光临，<br><span class="name-sticker">冷冻兔肉</span><br>的小基地<span class="orange">！</span>', 'Welcome to<br><span class="name-sticker">Frozen Rabbit’s</span><br>little base<span class="orange">!</span>', 'ようこそ、<br><span class="name-sticker">冷凍うさぎ</span><br>の小さな拠点へ<span class="orange">！</span>'],
   ['.hero-aside', '', '生产采集是本业，拯救世界是副业。<span aria-hidden="true">✳</span>', 'Crafter by trade, world-saver on the side.<span aria-hidden="true">✳</span>', '本業はギャザクラ、世界を救うのは副業。<span aria-hidden="true">✳</span>'],
   ['.hero-description', '', 'FFXIV 备料、采集与制作的小帮手。<br>需要什么，自己拿，别客气。', 'A little help with FFXIV materials, gathering and crafting.<br>Take what you need. Make yourself at home.', 'FFXIV の素材集め・採集・製作をお手伝い。<br>必要なものを、どうぞご自由に。'],
