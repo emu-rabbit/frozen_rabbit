@@ -4,7 +4,9 @@ import path from 'node:path';
 
 const directory = path.resolve(process.argv[2] || 'dist');
 const html = await readFile(path.join(directory, 'index.html'), 'utf8');
-const origin = 'https://emu-rabbit.github.io/frozen_rabbit/';
+const origin = 'https://frozenrabbit.com/';
+assert.equal((await readFile(path.join(directory, 'CNAME'), 'utf8')).trim(), new URL(origin).hostname);
+assert.ok(!html.includes('https://emu-rabbit.github.io/frozen_rabbit/'), 'Homepage metadata must use the custom domain');
 const meta = (name) => {
   const matches = [...html.matchAll(new RegExp(`<meta (?:name|property)="${name}" content="([^"]*)">`, 'g'))];
   assert.equal(matches.length, 1, `Expected one ${name}`);

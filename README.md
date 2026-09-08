@@ -2,6 +2,26 @@
 
 冷凍兔肉的 FFXIV 工具入口：介紹 Workshop、Tome 與 Cosmic，並提供各專案的連結。
 
+## GitHub Pages 部署
+
+正式網址：<https://frozenrabbit.com/>。`.github/workflows/deploy.yml` 在推送 `main` 或手動執行時建置並驗證網站，只發布 `dist/`。GitHub 儲存庫的 Settings → Pages → Source 必須選擇 **GitHub Actions**，Custom domain 設為 `frozenrabbit.com`；Actions 部署的網域設定以 Pages 設定為準，不能只依靠 CNAME 檔。
+
+GoDaddy DNS 設定（TTL 可維持 1 小時）：
+
+| 類型 | 名稱 | 資料 |
+| --- | --- | --- |
+| A | @ | 185.199.108.153 |
+| A | @ | 185.199.109.153 |
+| A | @ | 185.199.110.153 |
+| A | @ | 185.199.111.153 |
+| CNAME | www | emu-rabbit.github.io |
+
+將原本 `@ → WebsiteBuilder Site` 的 A 記錄改為第一筆 GitHub IP，再新增其餘三筆；不要保留舊的網站服務 A 記錄。將既有 `www → frozenrabbit.com` 改成表中的目標，不包含協定或儲存庫路徑。保留 NS、SOA、`_domainconnect`、`_dmarc` 與其他子網域設定。
+
+先完成 GitHub Pages 的 Custom domain，再切換 DNS。DNS 生效並且 GitHub 憑證簽發後，在 Pages 勾選 **Enforce HTTPS**。最後確認根網域首頁、www 轉址、robots.txt、sitemap.xml 與分享圖都可正常使用。DNS 傳播可能需要最多 24 小時。
+
+官方說明：[GitHub Pages 自訂網域](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site)。
+
 ## 本機預覽
 
 使用 Node.js 執行 `npm run dev`，開啟 http://127.0.0.1:4173。
@@ -14,12 +34,12 @@
 
 ## SEO 與連結預覽
 
-目前以 `https://emu-rabbit.github.io/frozen_rabbit/` 作為正式網址，發布內容為 `dist/`。首頁介紹、三個工具的用途與連結、照片說明都直接包含在初始 HTML，無須執行 JavaScript 才能讀取。
+目前以 `https://frozenrabbit.com/` 作為正式網址，發布內容為 `dist/`。首頁介紹、三個工具的用途與連結、照片說明都直接包含在初始 HTML，無須執行 JavaScript 才能讀取。
 
 `index.html` 維護 canonical、索引設定、Open Graph、Twitter 大圖卡片，以及 WebSite、CollectionPage、工具清單與作者的 JSON-LD。這是工具入口網站，因此首頁以 CollectionPage 描述；各工具才使用 WebApplication。`site.js` 沿用現有翻譯，同步四語的頁面標題、描述、分享欄位與工具結構化資料。爬蟲與分享平台取得的初始內容為繁體中文；目前沒有獨立語系網址，因此不宣告指向同一頁的多語 hreflang。
 
 分享圖為 `assets/og-cover.jpg`，1200 × 630 JPEG，由 `crafter.jpg` 經內建 imagegen 處理後縮放、壓縮。原始照片未修改。處理要求為僅裁切與縮放、保留人物和背景、不新增文字；生成式處理仍可能有細節差異。
 
-`robots.txt` 與 `sitemap.xml` 一起輸出。GitHub Pages 專案子目錄中的 robots.txt 不取代網域根目錄的 robots.txt；本站可索引設定由 HTML robots 標籤提供，sitemap 可在 Search Console 提交。若日後改成獨立網域，需一起更新 HTML 的 canonical、OG URL、圖片絕對網址、JSON-LD，以及 robots、sitemap 和驗證腳本。
+`robots.txt` 與 `sitemap.xml` 一起輸出。正式網域根目錄提供 robots.txt，sitemap 可在 Search Console 提交。CNAME、HTML metadata、robots、sitemap 與驗證腳本均使用 frozenrabbit.com。
 
 `npm run build` 會自動執行 SEO 檢查，也可使用 `npm run seo:verify` 驗證既有 `dist/`。檢查涵蓋初始 HTML、描述一致性、結構化資料與可見工具介紹、素材路徑、sitemap 與 JPEG 實際尺寸。這些是本機產物檢查；發布後仍需確認公開網址回應與分享平台的快取更新。
