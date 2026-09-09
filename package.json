@@ -7,5 +7,9 @@
     "dev": "node server.mjs",
     "build": "node build.mjs && node scripts/verify-seo.mjs",
     "seo:verify": "node scripts/verify-seo.mjs"
+  },
+  "devDependencies": {
+    "linkedom": "^0.18.13",
+    "playwright": "^1.63.0"
   }
 }

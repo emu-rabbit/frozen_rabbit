@@ -200,3 +200,7 @@ footer { padding-block: 24px; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; }
 }
+
+.locale-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px 24px; padding-block: 24px; font-size: 14px; }
+.locale-links a { text-decoration: underline; text-underline-offset: 4px; }
+.locale-links a[aria-current] { font-weight: 800; }
