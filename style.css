@@ -50,9 +50,9 @@ h1 { font-size: clamp(42px, 4.5vw, 62px); font-weight: 900; letter-spacing: -2px
 .button { display: inline-flex; justify-content: space-between; align-items: center; gap: 35px; padding: 13px 21px; background: var(--ink); color: var(--paper); font-size: 18px; font-weight: 700; border: 1px solid var(--ink); box-shadow: 4px 4px 0 #d6a66b; transition: transform .2s, box-shadow .2s; }
 .button:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 #d6a66b; }
 .button span { font-size: 24px; }
-.collage { position: relative; min-width: 0; height: 460px; isolation: isolate; }
+.collage { position: relative; min-width: 0; height: 525px; isolation: isolate; }
 .collage::before { content: ''; position: absolute; width: 88%; height: 85%; left: 10%; top: 10%; background: #d1dbb5; border-radius: 49% 51% 42% 58%; transform: rotate(-15deg); z-index: -1; }
-.character-sticker { position: absolute; top: 56px; left: -28px; width: 103%; height: 390px; filter: drop-shadow(5px 8px 0 #293b3229); transform: rotate(-8deg); transition: transform .4s; }
+.character-sticker { position: absolute; top: 26px; left: calc(-42px - 8.625%); width: 132.25%; height: 517.5px; filter: drop-shadow(5px 8px 0 #293b3229); transform: rotate(-8deg); transition: transform .4s; }
 .character-sticker:hover { transform: rotate(-5deg) translateY(-7px); }
 .mini-photo { position: absolute; right: -3px; top: 8px; width: 210px; padding: 8px; background: var(--paper); transform: rotate(11deg); box-shadow: 2px 5px 0 #243b3125; border: 1px solid #dedccc; }
 .mini-photo figcaption { font-size: 14px; text-align: center; padding: 9px 0 2px; }
@@ -127,8 +127,8 @@ footer { padding-block: 24px; }
   .wrap { width: calc(100% - 48px); }
   .hero-aside { font-size: 16px; }
   .hero-aside span { display: none; }
-  .collage { height: 380px; }
-  .character-sticker { height: 300px; top: 78px; left: -28px; width: 115%; }
+  .collage { height: 432px; }
+  .character-sticker { height: 396.75px; top: 55px; left: calc(-38px - 9.6%); width: 147.2%; }
   .mini-photo { width: 170px; }
   .mini-photo img { height: 80px; }
   .sunburst { width: 100px; height: 100px; }
@@ -156,8 +156,8 @@ footer { padding-block: 24px; }
   .hero-aside { margin-top: 19px; font-size: 16px; }
   .hero-description { font-size: 16px; }
   .hero-button { display: none; }
-  .collage { width: 100%; max-width: 370px; justify-self: center; height: 330px; margin-top: 22px; }
-  .character-sticker { top: 50px; left: -15px; width: 105%; height: 255px; }
+  .collage { width: 100%; max-width: 370px; justify-self: center; height: 375px; margin-top: 22px; }
+  .character-sticker { top: 30px; left: calc(-25px - 8.625%); width: 132.25%; height: 339.25px; }
   .collage::before { height: 83%; }
   .sunburst { width: 95px; height: 95px; top: 2px; }
   .mini-photo { width: 158px; top: 0; right: 3px; }
