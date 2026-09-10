@@ -3,8 +3,9 @@ import { pathToFileURL } from 'node:url';
 import path from 'node:path';
 const browser = await chromium.launch({ headless: true, executablePath: process.env.CHROMIUM_PATH || undefined });
 try {
+ for (const language of ['tw', 'cn', 'en', 'ja']) {
   const page = await browser.newPage({ viewport: { width: 1200, height: 630 }, deviceScaleFactor: 1 });
-  await page.goto(pathToFileURL(path.resolve('dist/tw/index.html')).href);
+  await page.goto(pathToFileURL(path.resolve(`dist/${language}/index.html`)).href);
   // Reuse the actual hero markup, including its original photo and SVG cutout.
   await page.evaluate(() => {
     const hero = document.querySelector('.hero').cloneNode(true);
@@ -35,6 +36,9 @@ try {
     body { width:1200px; height:630px; overflow:hidden; border:16px solid #fffdf4; }
     .hero.wrap { width:1080px; min-height:540px; height:540px; padding:18px 0 0; grid-template-columns:49% 51%; }
     h1 {font-size:58px;line-height:1.4;}
+    html[lang='en'] h1 {font-size:46px;font-family:Arial,sans-serif;}
+    html[lang='ja'] h1 {font-size:46px;}
+    html[lang='en'] .hero-aside {font-size:17px;}
     .hero-aside {font-size:20px; margin-top:26px;}
     .hero-description {font-size:17px; font-weight:800;letter-spacing:2px;margin-top:22px;}
     .collage {transform:translateY(12px);}
@@ -42,5 +46,7 @@ try {
     .share-credit {position:absolute;right:48px;bottom:35px;font-size:12px;color:#435646;}
   ` });
   await page.evaluate(async () => { await document.fonts.ready; await Promise.all([...document.images].map(img => img.decode().catch(() => {}))); });
-  await page.screenshot({ path: 'assets/og-base-v2.jpg', type: 'jpeg', quality: 90 });
+  await page.screenshot({ path: `assets/og-${language}-v3.jpg`, type: 'jpeg', quality: 90 });
+  await page.close();
+ }
 } finally { await browser.close(); }

@@ -22,7 +22,7 @@ for (const route of ['', ...Object.keys(locales)]) {
   assert.equal(meta('robots'), 'index, follow, max-image-preview:large');
   for (const key of ['og:title', 'twitter:title']) assert.equal(meta(key), document.title);
   for (const key of ['og:description', 'twitter:description']) assert.equal(meta(key), meta('description'));
-  for (const key of ['og:image','og:image:secure_url','twitter:image']) assert.equal(meta(key), origin + 'assets/og-base-v2.jpg');
+  for (const key of ['og:image','og:image:secure_url','twitter:image']) assert.equal(meta(key), origin + `assets/og-${locale}-v3.jpg`);
   assert.equal(meta('twitter:card'), 'summary_large_image');
   assert.equal(meta('og:image:type'), 'image/jpeg');
   assert.equal(meta('og:image:alt'), meta('twitter:image:alt'));
@@ -60,7 +60,8 @@ const robots = await readFile(path.join(directory,'robots.txt'),'utf8');
 assert.ok(robots.includes(`Sitemap: ${origin}sitemap.xml`));
 const sitemap = await readFile(path.join(directory,'sitemap.xml'),'utf8');
 assert.deepEqual([...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]), Object.keys(locales).map(key => `${origin}${key}/`));
-const jpeg = await readFile(path.join(directory,'assets/og-base-v2.jpg'));
+for (const locale of Object.keys(locales)) {
+const jpeg = await readFile(path.join(directory,`assets/og-${locale}-v3.jpg`));
 assert.equal(jpeg.readUInt16BE(0),0xffd8);
 let dimensions;
 for (let offset = 2; offset < jpeg.length;) {
@@ -72,4 +73,5 @@ for (let offset = 2; offset < jpeg.length;) {
 }
 assert.deepEqual(dimensions,[1200,630]);
 assert.ok(jpeg.length < 1024*1024);
+}
 console.log('SEO verified: all five initial HTML pages, four locales, canonical/hreflang, localized structured data, assets, sitemap and 1200 × 630 JPEG.');

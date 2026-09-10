@@ -13,6 +13,8 @@ for (const route of ['', ...Object.keys(locales)]) {
   const language = route || 'tw';
   const { document } = parseHTML(source);
   localize(document, language);
+  const imageUrl = `${origin}/assets/og-${language}-v3.jpg`;
+  for (const selector of ['[property="og:image"]', '[property="og:image:secure_url"]', '[name="twitter:image"]']) document.querySelector(selector).content = imageUrl;
   const canonical = `${origin}/${language}/`;
   document.querySelector('[rel="canonical"]').href = canonical;
   document.querySelector('[property="og:url"]').content = canonical;
@@ -50,6 +52,7 @@ for (const route of ['', ...Object.keys(locales)]) {
   const list = data['@graph'].find(item => item['@type'] === 'ItemList');
   list['@id'] = canonical + '#tools';
   data['@graph'].find(item => item['@type'] === 'ImageObject').caption = document.querySelector('[property="og:image:alt"]').content;
+  data['@graph'].find(item => item['@type'] === 'ImageObject').contentUrl = imageUrl;
   structured.textContent = JSON.stringify(data).replaceAll('<', '\\u003c');
   await mkdir(path.join(output, route), { recursive: true });
   await writeFile(path.join(output, route, 'index.html'), document.toString());

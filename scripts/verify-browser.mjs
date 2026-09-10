@@ -2,6 +2,16 @@ import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
 const browser = await chromium.launch({headless:true, executablePath:process.env.CHROMIUM_PATH || undefined});
 try {
+ for (const [locale, expected, saved] of [['en-US','en'],['ja-JP','ja'],['zh-CN','cn'],['zh-TW','tw'],['de-DE','tw'],['en-US','ja','ja']]) {
+  const context = await browser.newContext({locale});
+  if(saved) await context.addInitScript(value => localStorage.setItem('frozen-rabbit-language',value),saved);
+  const check = await context.newPage();
+  await check.goto('http://127.0.0.1:4186/?ref=test#projects');
+  await check.waitForURL('**/'+expected+'/?ref=test#projects');
+  await check.goto('http://127.0.0.1:4186/cn/');
+  assert.equal(await check.locator('html').getAttribute('lang'),'zh-Hans');
+  await context.close();
+ }
  const page = await browser.newPage();
  const errors = [];
  page.on('pageerror', e => errors.push(e.message));

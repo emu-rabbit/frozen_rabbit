@@ -36,13 +36,13 @@ GoDaddy DNS 設定（TTL 可維持 1 小時）：
 
 ## SEO 與連結預覽
 
-正式網址為 https://frozenrabbit.com/，發布內容為 `dist/`。四語網址為 `/tw/`（繁中）、`/cn/`（簡中）、`/en/`（英文）、`/ja/`（日文）。根網址保留繁中入口，canonical 指向 `/tw/`；各語系頁面有自己的 canonical、互相對應的 hreflang，以及指向根入口的 x-default。
+正式網址為 https://frozenrabbit.com/，發布內容為 `dist/`。四語網址為 `/tw/`（繁中）、`/cn/`（簡中）、`/en/`（英文）、`/ja/`（日文）。根網址提供繁中靜態備援，瀏覽器會依已選語系、瀏覽器語言（無匹配則繁中）自動轉到語系路徑；canonical 指向 `/tw/`；各語系頁面有自己的 canonical、互相對應的 hreflang，以及指向根入口的 x-default。
 
 `index.html` 維護繁中內容與共用版型，`localization.mjs` 維護其他語系翻譯；`build.mjs` 輸出各語系完整 HTML、Open Graph、Twitter 與 JSON-LD。爬蟲與分享平台無須執行 JavaScript 即可取得對應語系內容。不要直接修改 dist。
 
-語系選單前往對應網址，保留其他查詢參數與錨點；返回、重新整理與分享都以網址語系為準，不受舊 localStorage 設定影響。頁尾提供停用 JavaScript 時也能使用的語系連結。`?lang=en` 等查詢形式可在瀏覽器轉到正式語系路徑；對外分享請使用路徑形式，讓不執行 JavaScript 的預覽服務取得正確語系。
+語系選單前往對應網址，保留其他查詢參數與錨點；返回、重新整理與分享都以網址語系為準，明確語系路徑優先於 localStorage 記憶與瀏覽器語言。頁尾提供停用 JavaScript 時也能使用的語系連結。`?lang=en` 等查詢形式可在瀏覽器轉到正式語系路徑；對外分享請使用路徑形式，讓不執行 JavaScript 的預覽服務取得正確語系。
 
-共用分享圖為 `assets/og-base-v2.jpg`，1200 × 630 JPEG，沿用首頁紙張底色、藍色標籤、照片與 SVG 人物貼紙，沒有重新生成角色。版本化檔名避免沿用舊圖片網址。分享文字隨語系變更，圖片保留繁中品牌主視覺。
+四語分享圖為 `assets/og-{tw,cn,en,ja}-v3.jpg`，1200 × 630 JPEG，沿用首頁紙張底色、藍色標籤、照片與 SVG 人物貼紙，沒有重新生成角色。版本化檔名避免沿用舊圖片網址。分享文字與圖片內文皆隨語系變更，沿用一致的品牌構圖。
 
 重新輸出分享圖：先執行 `node build.mjs`，再執行 `node scripts/render-og.mjs`，最後 `npm run build`。渲染使用 Playwright Chromium（可先執行 `npx playwright install chromium`），或用環境變數 `CHROMIUM_PATH` 指定本機 Chromium／Edge 執行檔。Google Fonts 可用時會等待字型載入。
 
