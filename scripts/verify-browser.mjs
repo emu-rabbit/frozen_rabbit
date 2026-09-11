@@ -41,13 +41,8 @@ try {
  await page.screenshot({path:'dist/english-desktop.png',fullPage:true});
  await page.setViewportSize({width:390,height:844});
  await page.screenshot({path:'dist/english-mobile.png',fullPage:true});
- const nojs = await browser.newContext({javaScriptEnabled:false});
- const staticPage = await nojs.newPage();
- await staticPage.goto('http://127.0.0.1:4186/ja/');
- assert.ok((await staticPage.locator('h1').textContent()).includes('ようこそ'));
- await staticPage.locator('.locale-links a[lang="en"]').click();
- assert.ok((await staticPage.locator('h1').textContent()).includes('Welcome'));
+ assert.equal(await page.locator('footer a, .locale-links').count(),0);
  assert.equal((await page.request.get('http://127.0.0.1:4186/unknown/')).status(),404);
  assert.deepEqual(errors,[]);
- console.log('Browser verified: locale/reload/history/query/hash, mobile/desktop widths, translated photo dialog, no-JS language links and 404.');
+ console.log('Browser verified: locale/reload/history/query/hash, mobile/desktop widths, translated photo dialog, clean footer and 404.');
 } finally {await browser.close();}

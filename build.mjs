@@ -27,18 +27,6 @@ for (const route of ['', ...Object.keys(locales)]) {
     link.setAttribute('href', `${origin}/${key ? key + '/' : ''}`);
     document.head.append(link);
   }
-  const switchLinks = document.createElement('div');
-  switchLinks.className = 'locale-links';
-  for (const [key, lang] of Object.entries(locales)) {
-    const link = document.createElement('a');
-    link.href = `/${key}/`;
-    link.hreflang = lang;
-    link.lang = lang;
-    link.textContent = document.querySelector(`option[value="${key}"]`).textContent;
-    if (key === language) link.setAttribute('aria-current', 'page');
-    switchLinks.append(link);
-  }
-  document.querySelector('footer').append(switchLinks);
   for (const option of document.querySelectorAll('#language option')) {
     if (option.getAttribute('value') === language) option.setAttribute('selected', '');
     else option.removeAttribute('selected');

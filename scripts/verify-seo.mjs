@@ -33,7 +33,7 @@ for (const route of ['', ...Object.keys(locales)]) {
     assert.equal(document.querySelector(`link[hreflang="${language}"]`).href, origin + (key ? key + '/' : ''));
   }
   assert.equal(document.querySelector('#language option[selected]').getAttribute('value'), locale);
-  assert.equal(document.querySelectorAll('.locale-links a').length,4);
+  assert.equal(document.querySelectorAll('footer a, .locale-links').length,0);
   const graph = JSON.parse(document.querySelector('#structured-data').textContent)['@graph'];
   const page = graph.find(entity => entity['@type'] === 'CollectionPage');
   assert.equal(page.name,document.title);
