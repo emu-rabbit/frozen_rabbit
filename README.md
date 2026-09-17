@@ -30,7 +30,7 @@ GoDaddy DNS 設定（TTL 可維持 1 小時）：
 
 `index.html` 維護介紹與連結，`style.css` 維護響應式版面。`assets/` 使用站主提供的 FFXIV 遊戲照片，以及三個專案各自設定的 favicon。首頁人物以 SVG 裁切原照、加上白色紙邊，沒有重繪角色。原始下載資料夾中的照片未修改。
 
-頁面圖片使用 WebP，依顯示用途縮放；首頁人物保留原解析度以維持 SVG 裁切座標與清晰度。相簿先載入 `friends-thumb.webp`、`witch-thumb.webp`，點擊後才載入原解析度的 WebP 大圖。下方圖片保留延遲載入並使用非同步解碼。網站與 Apple 圖示共用 180 × 180 PNG，分享圖保留 1200 × 630 JPEG。更新圖片時，請同步維護 HTML 的尺寸。
+頁面圖片使用 WebP，依顯示用途縮放。首頁人物使用 `crafter-sticker.webp` 透明裁切圖（833 × 770），從原圖的 (627, 244) 裁出，沿用 `character-outline` 遮罩，並以相同 SVG 座標放回，保留白邊與清晰度；首頁不載入完整的 `crafter.webp`。宇宙卡片使用 480 × 857 的 `space-card.webp`，保留原照片比例與 CSS 取景位置。這兩張衍生圖的 WebP 品質分別為 85、80，原始 WebP 保留作為後續製圖來源。相簿先載入 `friends-thumb.webp`、`witch-thumb.webp`，點擊後才載入原解析度的 WebP 大圖。下方圖片保留延遲載入並使用非同步解碼。網站與 Apple 圖示共用 180 × 180 PNG，分享圖保留 1200 × 630 JPEG。更新圖片時，請同步維護 HTML 的尺寸。
 
 素材對照：`crafter.jpg` = `messageImage_1776248815070.jpg`；`book.jpg` = `messageImage_1777446404831.jpg`；`witch.jpg` = `messageImage_1780284008122.jpg`；`friends.png` = `twitter.png`；`space.png` = `螢幕擷取畫面 2026-08-17 084158.png`。遊戲影像 © SQUARE ENIX。
 
