@@ -26,7 +26,15 @@ GoDaddy DNS 設定（TTL 可維持 1 小時）：
 
 先執行 `npm ci`，再使用 Node.js 執行 `npm run dev`，開啟 http://127.0.0.1:4173。
 
-`npm run build` 將靜態網站輸出至 `dist/`，可放至靜態網站主機。建置使用 LinkeDOM 產生多語靜態頁，發布後不需要伺服器端程式。`site.js` 提供照片放大預覽；停用 JavaScript 時，工具連結與原圖連結仍可使用。字型使用 Google Fonts；無法連線時使用系統字型。
+`npm run build` 將靜態網站輸出至 `dist/`，可放至靜態網站主機。建置使用 LinkeDOM 產生多語靜態頁，發布後不需要伺服器端程式。`site.js` 提供照片放大預覽；停用 JavaScript 時，工具連結與原圖連結仍可使用。字型沿用 Noto Sans TC／SC、Noto Serif SC 與 Klee One，依各語系文字製作本站 WOFF2 子集，不需連線 Google Fonts；載入期間使用系統字型。
+
+### 字型與載入速度
+
+`route-language.js` 在建置時內嵌於 HTML 最前面的 charset 之後，讓語系導向不必等待樣式或外部 JS；根網址仍保留完整繁中靜態內容，支援無 JavaScript 瀏覽與分享預覽。
+
+`assets/fonts/manifest.json` 記錄各語系字元與字型 CSS，建置會檢查是否符合目前文案。修改文案或照片說明後，若提示字型子集過期，執行 `node scripts/update-fonts.mjs`（需連網），將產生的字型、manifest 與文案一起提交。平常建置不需要下載字型。字型依 SIL Open Font License 提供，授權全文位於 `assets/fonts/*-OFL.txt`。保留原字體、字重與 `font-display: swap`；不要只換成系統字型以取得較好的測試數字。
+
+`node scripts/measure-load.mjs <建置快照目錄> <標籤> 3` 使用 Playwright 執行三輪冷快取比較，設定為 150 ms 延遲、1.6 Mbps 下載及 4 倍 CPU 放慢。可用 `CHROMIUM_PATH` 指定 Edge；原始數據與截圖輸出至不提交的 `performance-results/`。根入口的 FCP、LCP 與字型就緒時間從第一次導覽開始計算，包含語系跳轉。比較時使用同一瀏覽器與相同伺服方式，並先保留修改前的 dist 快照；本機限速結果不代表正式站真實使用者的載入時間。
 
 `index.html` 維護介紹與連結，`style.css` 維護響應式版面。`assets/` 使用站主提供的 FFXIV 遊戲照片，以及三個專案各自設定的 favicon。首頁人物以 SVG 裁切原照、加上白色紙邊，沒有重繪角色。原始下載資料夾中的照片未修改。
 
@@ -44,7 +52,7 @@ GoDaddy DNS 設定（TTL 可維持 1 小時）：
 
 四語分享圖為 `assets/og-{tw,cn,en,ja}-v3.jpg`，1200 × 630 JPEG，沿用首頁紙張底色、藍色標籤、照片與 SVG 人物貼紙，沒有重新生成角色。版本化檔名避免沿用舊圖片網址。分享文字與圖片內文皆隨語系變更，沿用一致的品牌構圖。
 
-重新輸出分享圖：先執行 `node build.mjs`，再執行 `node scripts/render-og.mjs`，最後 `npm run build`。渲染使用 Playwright Chromium（可先執行 `npx playwright install chromium`），或用環境變數 `CHROMIUM_PATH` 指定本機 Chromium／Edge 執行檔。Google Fonts 可用時會等待字型載入。
+重新輸出分享圖：先執行 `node build.mjs`，再執行 `node scripts/render-og.mjs`，最後 `npm run build`。渲染使用 Playwright Chromium（可先執行 `npx playwright install chromium`），或用環境變數 `CHROMIUM_PATH` 指定本機 Chromium／Edge 執行檔。
 
 `robots.txt` 一起輸出；sitemap.xml 由建置流程依四個正式語系網址產生，可在 Search Console 提交。多語設定參考 [Google Search Central](https://developers.google.com/search/docs/specialty/international/localized-versions)。
 

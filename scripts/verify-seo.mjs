@@ -17,6 +17,12 @@ for (const route of ['', ...Object.keys(locales)]) {
     return nodes[0].content;
   };
   assert.equal(document.documentElement.lang, locales[locale]);
+  assert.ok(!html.includes('fonts.googleapis.com') && !html.includes('fonts.gstatic.com'), `${route}: no external font requests`);
+  assert.ok(html.indexOf('id="route-language"') < html.indexOf('rel="stylesheet"'), `${route}: routing precedes styles`);
+  for (const match of document.querySelector('#local-fonts').textContent.matchAll(/url\(([^)]+)\)/g)) {
+    const font = await readFile(path.join(directory, match[1]));
+    assert.equal(font.toString('ascii', 0, 4), 'wOF2');
+  }
   assert.equal(document.querySelector('[rel="canonical"]').href, canonical);
   assert.equal(meta('og:url'), canonical);
   assert.equal(meta('robots'), 'index, follow, max-image-preview:large');

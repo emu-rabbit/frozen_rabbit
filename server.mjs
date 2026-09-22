@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import './build.mjs';
 const root = path.resolve('dist');
-const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.txt': 'text/plain', '.xml': 'application/xml', '.webp': 'image/webp', '.png': 'image/png', '.jpg': 'image/jpeg' };
+const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.txt': 'text/plain', '.xml': 'application/xml', '.webp': 'image/webp', '.png': 'image/png', '.jpg': 'image/jpeg', '.woff2': 'font/woff2' };
 createServer(async (req, res) => {
   const url = new URL(req.url, 'http://localhost');
   if (/^\/(tw|cn|en|ja)$/.test(url.pathname)) {

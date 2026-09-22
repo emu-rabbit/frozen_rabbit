@@ -31,6 +31,8 @@ try {
     for (const link of document.querySelectorAll('link[rel="stylesheet"]')) {
       if (link.getAttribute('href').startsWith('/')) link.href = new URL('style.css', base).href;
     }
+    const fonts = document.querySelector('#local-fonts');
+    fonts.textContent = fonts.textContent.replace(/url\(\/([^)]*)\)/g, (_, asset) => `url(${new URL(asset, base).href})`);
   });
   await page.addStyleTag({ content: `
     body { width:1200px; height:630px; overflow:hidden; border:16px solid #fffdf4; }

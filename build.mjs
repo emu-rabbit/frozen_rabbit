@@ -2,6 +2,7 @@ import { mkdir, copyFile, cp, rm, readFile, writeFile } from 'node:fs/promises';
 import { parseHTML } from 'linkedom';
 import { localize } from './localization.mjs';
 import path from 'node:path';
+import { fontCharacters } from './scripts/font-subsets.mjs';
 const output = path.resolve('dist');
 if (output !== path.join(process.cwd(), 'dist')) throw new Error('Unexpected build target');
 await rm(output, { recursive: true, force: true });
@@ -9,10 +10,21 @@ await mkdir(output, { recursive: true });
 const origin = 'https://frozenrabbit.com';
 const locales = { tw: 'zh-Hant', cn: 'zh-Hans', en: 'en', ja: 'ja' };
 const source = await readFile('index.html', 'utf8');
+const routing = await readFile('route-language.js', 'utf8');
+const fonts = JSON.parse(await readFile('assets/fonts/manifest.json', 'utf8'));
 for (const route of ['', ...Object.keys(locales)]) {
   const language = route || 'tw';
   const { document } = parseHTML(source);
   localize(document, language);
+  if (fontCharacters(document) !== fonts[language].characters) throw new Error(`Font subset is stale for ${language}; run node scripts/update-fonts.mjs`);
+  const routeScript = document.createElement('script');
+  routeScript.id = 'route-language';
+  routeScript.textContent = routing;
+  document.head.insertBefore(routeScript, document.querySelector('meta[charset]').nextSibling);
+  const fontStyle = document.createElement('style');
+  fontStyle.id = 'local-fonts';
+  fontStyle.textContent = fonts[language].css;
+  document.head.append(fontStyle);
   const imageUrl = `${origin}/assets/og-${language}-v3.jpg`;
   for (const selector of ['[property="og:image"]', '[property="og:image:secure_url"]', '[name="twitter:image"]']) document.querySelector(selector).content = imageUrl;
   const canonical = `${origin}/${language}/`;
@@ -47,6 +59,7 @@ for (const route of ['', ...Object.keys(locales)]) {
 }
 for (const file of ['style.css', 'site.js', 'robots.txt', 'CNAME']) await copyFile(file, path.join(output,file));
 await cp('assets', path.join(output,'assets'), { recursive: true });
+await rm(path.join(output, 'assets/fonts/manifest.json'));
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${Object.keys(locales).map(key => `  <url><loc>${origin}/${key}/</loc></url>`).join('\n')}\n</urlset>\n`;
 await writeFile(path.join(output,'sitemap.xml'), sitemap);
 console.log('Built root entry and four localized static pages in dist/');
